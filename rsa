@@ -1,0 +1,54 @@
+def gcd(a, b):
+    while b != 0:
+        a, b = b, a % b
+    return a
+
+def mod_inverse(e, phi):
+    for d in range(1, phi):
+        if (e * d) % phi == 1:
+            return d
+    return None
+
+def encrypt(msg, e, n):
+    return (msg ** e) % n
+
+def decrypt(cipher, d, n):
+    return (cipher ** d) % n
+
+# Step 1: Choose two prime numbers
+p = 3
+q = 11
+
+# Step 2: Compute n and phi
+n = p * q            # n = 33
+phi = (p - 1) * (q - 1)  # phi = 20
+
+# Step 3: Choose public key e
+e = 7
+while gcd(e, phi) != 1:
+    e += 1
+
+# Step 4: Calculate private key d
+d = mod_inverse(e, phi)
+
+# Display keys
+print(f"Public Key: (e={e}, n={n})")
+print(f"Private Key: (d={d}, n={n})")
+
+# Step 5: Encryption
+message = 4
+cipher = encrypt(message, e, n)
+print(f"\nOriginal Message: {message}")
+print(f"Encrypted Cipher: {cipher}")
+
+# Step 6: Decryption
+decrypted = decrypt(cipher, d, n)
+print(f"Decrypted Message: {decrypted}")
+====================================================================output================================================================
+
+Public Key: (e=7, n=33)
+Private Key: (d=3, n=33)
+
+Original Message: 4
+Encrypted Cipher: 16
+Decrypted Message: 4
