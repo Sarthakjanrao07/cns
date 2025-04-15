@@ -1,0 +1,32 @@
+# Publicly shared variables
+p = 23    # A prime number
+g = 5     # A primitive root modulo p
+
+# Private keys (secret)
+a = 6     # Alice's private key
+b = 15    # Bob's private key
+
+# Public keys
+A = (g ** a) % p  # Alice sends to Bob
+B = (g ** b) % p  # Bob sends to Alice
+
+# Shared secret calculation
+shared_secret_Alice = (B ** a) % p
+shared_secret_Bob = (A ** b) % p
+
+print("Publicly Shared Prime (p):", p)
+print("Primitive Root (g):", g)
+print("\nAlice's Public Key (A):", A)
+print("Bob's Public Key (B):", B)
+print("\nShared Secret (Alice):", shared_secret_Alice)
+print("Shared Secret (Bob):", shared_secret_Bob)
+
+  ============================output=========================================
+Publicly Shared Prime (p): 23
+Primitive Root (g): 5
+
+Alice's Public Key (A): 8
+Bob's Public Key (B): 2
+
+Shared Secret (Alice): 2
+Shared Secret (Bob): 2
